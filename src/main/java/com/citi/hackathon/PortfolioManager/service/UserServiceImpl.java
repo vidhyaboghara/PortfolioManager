@@ -33,7 +33,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user){
-        if(userRepository.getById(user.getId()) != null){
+        Optional<User> userInDb = userRepository.findById(user.getId());
+        if(userInDb.isPresent()){
             userRepository.save(user);
         }
     }
