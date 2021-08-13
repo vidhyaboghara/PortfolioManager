@@ -10,6 +10,7 @@ import com.citi.hackathon.PortfolioManager.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,5 +48,21 @@ public class TransactionController {
     public Iterable<Stock> findAllStocks(){
         return stockService.getAll();
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/addUser")
+    public void addUser(@RequestBody User user){
+        userService.addNewUser(user);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/addStock")
+    public void addStock(@RequestBody Stock stock){
+        stockService.addStock(stock);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/addTransaction")
+    public void addTransaction(@RequestBody Transaction transaction){
+        transactionService.addNewTransaction(transaction);
+    }
+
 
 }

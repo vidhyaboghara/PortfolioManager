@@ -3,11 +3,13 @@ package com.citi.hackathon.PortfolioManager.service;
 import com.citi.hackathon.PortfolioManager.entities.Stock;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 public interface StockService {
     Collection<Stock> getAll();
 
-    Stock getStockById(Integer id);
+    List<Stock> getStockById(Integer id);
 
     Stock getStockByName(String name);
 
@@ -15,5 +17,5 @@ public interface StockService {
 
     void updateStock(Stock stock);
 
-    void deleteStock(int id);
+    void deleteStock(int id, Date date);
 }

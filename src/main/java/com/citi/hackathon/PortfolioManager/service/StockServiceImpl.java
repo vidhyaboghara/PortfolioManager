@@ -1,7 +1,7 @@
 package com.citi.hackathon.PortfolioManager.service;
 
 import com.citi.hackathon.PortfolioManager.entities.Stock;
-import com.citi.hackathon.PortfolioManager.entities.Transaction;
+import com.citi.hackathon.PortfolioManager.entities.StockIdentifier;
 import com.citi.hackathon.PortfolioManager.repositories.StockRepository;
 import com.citi.hackathon.PortfolioManager.repositories.TransactionRepository;
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,8 +27,8 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public Stock getStockById(Integer id){
-        return stockRepository.getById(id);
+    public List<Stock> getStockById(Integer id){
+        return stockRepository.findByStockIdentifier_StockId(id);
     }
 
     @Override
@@ -41,17 +43,17 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public void updateStock(Stock stock){
-        Optional<Stock> stockInDb = stockRepository.findById(stock.getStockId());
+        Optional<Stock> stockInDb = stockRepository.findById(stock.getStockIdentifier());
         if(stockInDb.isPresent()){
             stockRepository.save(stock);
         }
     }
 
     @Override
-    public void deleteStock(int id){
-        Optional<Stock> stock = stockRepository.findById(id);
-        if(stock.isPresent()){
-            stockRepository.delete(stock.get());
+    public void deleteStock(int id, Date date){
+        Stock stock = stockRepository.findByStockIdentifier_StockIdAndStockIdentifier_Date(id, date);
+        if(null != stock){
+            stockRepository.delete(stock);
         }
     }
 }
