@@ -8,26 +8,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name="portfolio")
+@Table(name="transaction")
 @Getter
 @Setter
-public class Portfolio implements Serializable {
+public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name = "transaction_id")
+    private Integer transactionId;
 
-    @Column(name = "purchase_date")
-    private Date purchaseDate;
+    @Column(name = "transaction_date")
+    private Date transactionDate;
 
-    @Column(name = "stock_name")
-    private String stockName;
+    @Column(name = "transaction_type")
+    private TransactionType transactionType;
 
     @Column(name = "amount")
     private Integer amount;
-
-    @Column(name = "current_value")
-    private Float currentValue;
 
     @Column(name = "user_id")
     private Integer userId;
@@ -35,4 +32,11 @@ public class Portfolio implements Serializable {
     @JoinColumn(name = "id", referencedColumnName = "user_id")
     @ManyToOne( cascade={CascadeType.MERGE, CascadeType.PERSIST})
     private User user;
+
+    @Column(name = "stock_id")
+    private Integer stockId;
+
+    @JoinColumn(name = "stock_id", referencedColumnName = "stock_id")
+    @OneToOne( cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    private Stock stock;
 }

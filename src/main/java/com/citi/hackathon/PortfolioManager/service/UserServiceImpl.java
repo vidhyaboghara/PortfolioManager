@@ -1,10 +1,10 @@
 package com.citi.hackathon.PortfolioManager.service;
 
-import com.citi.hackathon.PortfolioManager.entities.Portfolio;
+import com.citi.hackathon.PortfolioManager.entities.Transaction;
 import com.citi.hackathon.PortfolioManager.entities.User;
-import com.citi.hackathon.PortfolioManager.repositories.PortfolioRepository;
+import com.citi.hackathon.PortfolioManager.repositories.TransactionRepository;
 import com.citi.hackathon.PortfolioManager.repositories.UserRepository;
-import com.citi.hackathon.PortfolioManager.response.UserPortfolio;
+import com.citi.hackathon.PortfolioManager.response.UserTransaction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PortfolioRepository portfolioRepository;
+    private TransactionRepository transactionRepository;
 
     private static final Logger logger = LogManager.getLogger(UserRepository.class);
 
@@ -31,21 +31,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Collection<UserPortfolio> getAllUsersWithPortfolios() {
+    public Collection<UserTransaction> getAllUsersWithTransactions() {
         Collection<User> users = userRepository.findAll();
-        Collection<UserPortfolio> userPortfolios = new ArrayList<>();
+        Collection<UserTransaction> userTransactions = new ArrayList<>();
 
         for (User user:users) {
-            UserPortfolio userPortfolio = new UserPortfolio();
-            userPortfolio.setId(user.getId());
-            userPortfolio.setFirstName(user.getFirstName());
-            userPortfolio.setLastName(user.getLastName());
-            userPortfolio.setEmailId(user.getEmailId());
-            userPortfolio.setPhone(user.getPhone());
-            userPortfolio.setPortfolioList((List<Portfolio>) portfolioRepository.getByUserId(user.getId()));
-            userPortfolios.add(userPortfolio);
+            UserTransaction userTransaction = new UserTransaction();
+            userTransaction.setId(user.getId());
+            userTransaction.setFirstName(user.getFirstName());
+            userTransaction.setLastName(user.getLastName());
+            userTransaction.setEmailId(user.getEmailId());
+            userTransaction.setPhone(user.getPhone());
+            userTransaction.setTransactionList((List<Transaction>) transactionRepository.getByUserId(user.getId()));
+            userTransactions.add(userTransaction);
         }
-        return userPortfolios;
+        return userTransactions;
     }
 
     @Override

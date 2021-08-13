@@ -1,12 +1,12 @@
 package com.citi.hackathon.PortfolioManager.service;
 
 import com.citi.hackathon.PortfolioManager.entities.User;
-import com.citi.hackathon.PortfolioManager.response.UserPortfolio;
+import com.citi.hackathon.PortfolioManager.response.UserTransaction;
 
 import java.util.Collection;
 
 public interface UserService {
-    Collection<UserPortfolio> getAllUsersWithPortfolios();
+    Collection<UserTransaction> getAllUsersWithTransactions();
 
     Collection<User> getAll();
 
