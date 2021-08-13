@@ -3,6 +3,7 @@ package com.citi.hackathon.PortfolioManager.rest;
 import com.citi.hackathon.PortfolioManager.entities.Stock;
 import com.citi.hackathon.PortfolioManager.entities.Transaction;
 import com.citi.hackathon.PortfolioManager.entities.User;
+import com.citi.hackathon.PortfolioManager.response.UserSummary;
 import com.citi.hackathon.PortfolioManager.response.UserTransaction;
 import com.citi.hackathon.PortfolioManager.service.StockService;
 import com.citi.hackathon.PortfolioManager.service.TransactionService;
@@ -83,5 +84,9 @@ public class TransactionController {
         transactionService.addNewTransaction(transaction);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/getusersummary/{id}")
+    public UserSummary getUserSummary(@PathVariable("id") int id){
+        return userService.getUserSummary(id);
+    }
 
 }

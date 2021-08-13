@@ -166,6 +166,50 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "gettransactionsbyid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/portfoliomanager/gettransactionsbyid/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"portfoliomanager",
+						"gettransactionsbyid",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserSummary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/portfoliomanager/getusersummary/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"portfoliomanager",
+						"getusersummary",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
