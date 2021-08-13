@@ -10,10 +10,9 @@ import com.citi.hackathon.PortfolioManager.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/portfoliomanager")
@@ -42,6 +41,26 @@ public class TransactionController {
     @RequestMapping(method = RequestMethod.GET, value = "/userandtransactions")
     public Iterable<UserTransaction> findAllUserAndTransaction(){
         return userService.getAllUsersWithTransactions();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/gettransactionsbyid/{id}")
+    public UserTransaction findUserAndTransactionById(@PathVariable("id") int id){
+        return userService.getUsersWithTransactionsById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getuserbyid/{id}")
+    public User getUserById(@PathVariable("id") int id){
+        return userService.getUserById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getstockbyid/{id}")
+    public Collection<Stock> getStockById(@PathVariable("id") int id){
+        return stockService.getStockById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/gettransactionbyid/{id}")
+    public Transaction getTransactionById(@PathVariable("id") int id){
+        return transactionService.getTransactionById(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getStocks")

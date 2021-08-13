@@ -8,6 +8,8 @@ import java.util.Collection;
 public interface UserService {
     Collection<UserTransaction> getAllUsersWithTransactions();
 
+    UserTransaction getUsersWithTransactionsById(int id);
+
     Collection<User> getAll();
 
     User getUserById(Integer id);

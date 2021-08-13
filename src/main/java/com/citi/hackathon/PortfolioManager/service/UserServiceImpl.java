@@ -49,6 +49,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserTransaction getUsersWithTransactionsById(int id) {
+        Optional<User> user = userRepository.findById(id);
+        if(user.isPresent()){
+            UserTransaction userTransaction = new UserTransaction();
+            userTransaction.setId(user.get().getId());
+            userTransaction.setFirstName(user.get().getFirstName());
+            userTransaction.setLastName(user.get().getLastName());
+            userTransaction.setEmailId(user.get().getEmailId());
+            userTransaction.setPhone(user.get().getPhone());
+            userTransaction.setTransactionList((List<Transaction>) transactionRepository.getByUserId(user.get().getId()));
+            return userTransaction;
+        }
+        return null;
+    }
+
+    @Override
     public User getUserById(Integer id){
         return userRepository.getById(id);
     }
