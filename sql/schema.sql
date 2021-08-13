@@ -4,7 +4,7 @@ CREATE TABLE `hackathon`.`user` (
                                   `last_name` VARCHAR(55) NOT NULL,
                                   `email_id` VARCHAR(100) NOT NULL,
                                   `phone` VARCHAR(13) NOT NULL,
-                                  PRIMARY KEY (`id`))
+                                  PRIMARY KEY (`id`));
 
 CREATE TABLE `hackathon`.`stock` (
                                     `stock_id` INT NOT NULL AUTO_INCREMENT,
