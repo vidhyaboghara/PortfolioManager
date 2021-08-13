@@ -18,6 +18,11 @@ public class PortfolioServiceImpl implements PortfolioService {
     private static final Logger logger = LogManager.getLogger(PortfolioRepository.class);
 
     @Override
+    public Collection<Portfolio> getAll() {
+        return portfolioRepository.findAll();
+    }
+
+    @Override
     public Portfolio getPortfolioById(Integer id){
         return portfolioRepository.getById(id);
     }
