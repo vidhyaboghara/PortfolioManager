@@ -1,8 +1,10 @@
 package com.citi.hackathon.PortfolioManager.rest;
 
+import com.citi.hackathon.PortfolioManager.entities.Stock;
 import com.citi.hackathon.PortfolioManager.entities.Transaction;
 import com.citi.hackathon.PortfolioManager.entities.User;
 import com.citi.hackathon.PortfolioManager.response.UserTransaction;
+import com.citi.hackathon.PortfolioManager.service.StockService;
 import com.citi.hackathon.PortfolioManager.service.TransactionService;
 import com.citi.hackathon.PortfolioManager.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +25,9 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
 
+    @Autowired
+    private StockService stockService;
+
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public Iterable<User> findAllUser(){
         return userService.getAll();
@@ -36,6 +41,11 @@ public class TransactionController {
     @RequestMapping(method = RequestMethod.GET, value = "/userandtransactions")
     public Iterable<UserTransaction> findAllUserAndTransaction(){
         return userService.getAllUsersWithTransactions();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getStocks")
+    public Iterable<Stock> findAllStocks(){
+        return stockService.getAll();
     }
 
 }
