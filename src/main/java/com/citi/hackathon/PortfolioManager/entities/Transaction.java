@@ -2,6 +2,8 @@ package com.citi.hackathon.PortfolioManager.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -44,5 +46,7 @@ public class Transaction implements Serializable {
             }
     )
     @OneToOne( cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    @NotFound(action = NotFoundAction.IGNORE)
     private Stock stock;
+
 }
