@@ -103,4 +103,9 @@ public class TransactionController {
         return stockService.getMarketMovers();
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/getspending/{id}")
+    public Double getSpending(@PathVariable("id") int id) throws ParseException {
+        return userService.getUserSpending(id);
+    }
+
 }

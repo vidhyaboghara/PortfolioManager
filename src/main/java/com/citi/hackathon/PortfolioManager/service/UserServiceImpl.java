@@ -1,6 +1,7 @@
 package com.citi.hackathon.PortfolioManager.service;
 
 import com.citi.hackathon.PortfolioManager.entities.StatusCount;
+import com.citi.hackathon.PortfolioManager.entities.SummarizedAmount;
 import com.citi.hackathon.PortfolioManager.entities.Transaction;
 import com.citi.hackathon.PortfolioManager.entities.User;
 import com.citi.hackathon.PortfolioManager.repositories.StockRepository;
@@ -149,6 +150,14 @@ public class UserServiceImpl implements UserService {
         }
         userNetWorth.setNetWorth(networth);
         return userNetWorth;
+    }
+
+    @Override
+    public Double getUserSpending(Integer id) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SummarizedAmount buy = transactionRepository.getBuyAmount(dateFormat.parse(dateFormat.format(new Date())), id);
+        SummarizedAmount sell = transactionRepository.getSellAmount(dateFormat.parse(dateFormat.format(new Date())), id);
+        return buy.getAmount()-sell.getAmount();
     }
 
 }
