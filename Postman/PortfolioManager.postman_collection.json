@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "be54a2e1-cf29-44cf-9874-697a974e031e",
+		"_postman_id": "e659f100-ed22-4274-a8cf-f66f278ecb9d",
 		"name": "PortfolioManager",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -10,7 +10,19 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "http://localhost:8080/api/portfoliomanager/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"portfoliomanager",
+						"users"
+					]
+				}
 			},
 			"response": []
 		},
