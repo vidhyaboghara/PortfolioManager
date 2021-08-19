@@ -4,15 +4,16 @@ import com.citi.hackathon.PortfolioManager.entities.Stock;
 import com.citi.hackathon.PortfolioManager.entities.StockIdentifier;
 import com.citi.hackathon.PortfolioManager.repositories.StockRepository;
 import com.citi.hackathon.PortfolioManager.repositories.TransactionRepository;
+import com.citi.hackathon.PortfolioManager.response.StockMarketMover;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class StockServiceImpl implements StockService {
@@ -55,5 +56,26 @@ public class StockServiceImpl implements StockService {
         if(null != stock){
             stockRepository.delete(stock);
         }
+    }
+
+    @Override
+    public List<StockMarketMover> getMarketMovers() throws ParseException {
+        List<StockMarketMover> marketMovers = new ArrayList<>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        List<Stock> stocksToday = stockRepository.findByStockIdentifier_Date(dateFormat.parse(dateFormat.format(new Date())));
+        for (Stock s: stocksToday) {
+            Stock yesterdayStock = stockRepository.findByStockIdentifier_StockIdAndStockIdentifier_Date(s.getStockIdentifier().getStockId(),dateFormat.parse(dateFormat.format(yesterday())));
+            StockMarketMover marketMover = new StockMarketMover();
+            marketMover.setStockName(s.getStockName());
+            marketMover.setMarketChange((s.getClosePrice() - yesterdayStock.getClosePrice())/100);
+            marketMovers.add(marketMover);
+        }
+        return marketMovers;
+    }
+
+    private Date yesterday() {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        return cal.getTime();
     }
 }

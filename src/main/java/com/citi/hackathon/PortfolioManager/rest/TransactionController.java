@@ -3,6 +3,7 @@ package com.citi.hackathon.PortfolioManager.rest;
 import com.citi.hackathon.PortfolioManager.entities.Stock;
 import com.citi.hackathon.PortfolioManager.entities.Transaction;
 import com.citi.hackathon.PortfolioManager.entities.User;
+import com.citi.hackathon.PortfolioManager.response.StockMarketMover;
 import com.citi.hackathon.PortfolioManager.response.UserNetWorth;
 import com.citi.hackathon.PortfolioManager.response.UserSummary;
 import com.citi.hackathon.PortfolioManager.response.UserTransaction;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/portfoliomanager")
@@ -94,6 +96,11 @@ public class TransactionController {
     @RequestMapping(method = RequestMethod.GET, value = "/getusernetworth/{id}")
     public UserNetWorth getUserNetWorth(@PathVariable("id") int id) throws ParseException {
         return userService.getUserNetWorth(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getmarketmovers")
+    public List<StockMarketMover> getMarketMovers() throws ParseException {
+        return stockService.getMarketMovers();
     }
 
 }

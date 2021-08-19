@@ -19,7 +19,8 @@
 				"d093bdaf-1d08-44e3-940e-5046129458cd",
 				"454593e0-702b-49a7-877e-de31a44b2770",
 				"ffeb410d-4977-498d-9c45-5ce0913d8f06",
-				"19c103f6-2e27-425f-badf-65f59bc8e3ef"
+				"19c103f6-2e27-425f-badf-65f59bc8e3ef",
+				"c1f2329e-31c9-4f38-bac3-33d10cb738ef"
 			],
 			"folders_order": [],
 			"protocolProfileBehavior": {},
@@ -30,7 +31,7 @@
 					"id": "19c103f6-2e27-425f-badf-65f59bc8e3ef",
 					"uid": "0-19c103f6-2e27-425f-badf-65f59bc8e3ef",
 					"name": "getusernetworth",
-					"url": "http://localhost:8080/api/portfoliomanager/getusernetworth/1",
+					"url": "http://{{hostname}}/api/portfoliomanager/getusernetworth/1",
 					"description": "",
 					"data": null,
 					"dataOptions": null,
@@ -138,6 +139,28 @@
 					"helperAttributes": null,
 					"collectionId": "a4d873fb-bb29-438b-acff-5b0d5aa231b7",
 					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "c1f2329e-31c9-4f38-bac3-33d10cb738ef",
+					"uid": "0-c1f2329e-31c9-4f38-bac3-33d10cb738ef",
+					"name": "getmarketmovers",
+					"url": "http://{{hostname}}/api/portfoliomanager/getmarketmovers",
+					"description": "",
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "a4d873fb-bb29-438b-acff-5b0d5aa231b7",
 					"pathVariables": {}
 				},
 				{
@@ -297,7 +320,7 @@
 			]
 		},
 		{
-			"id": "96973ad1-4423-4ba4-a0ec-7d7fe3553a84",
+			"id": "5b1e9861-7518-4af0-8eb8-9048cc5593f1",
 			"name": "My Workspace - globals",
 			"values": []
 		}

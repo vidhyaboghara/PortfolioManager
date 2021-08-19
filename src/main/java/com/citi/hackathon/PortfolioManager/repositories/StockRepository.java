@@ -13,5 +13,7 @@ public interface StockRepository extends JpaRepository<Stock, StockIdentifier> {
 
     Stock findByStockIdentifier_StockIdAndStockIdentifier_Date(int id, Date date);
 
+    List<Stock> findByStockIdentifier_Date(Date date);
+
     Stock getByStockName(String stockName);
 }
