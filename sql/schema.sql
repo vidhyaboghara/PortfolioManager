@@ -1,3 +1,5 @@
+CREATE SCHEMA `hackathon` ;
+
 CREATE TABLE `hackathon`.`user` (
                                   `id` INT NOT NULL AUTO_INCREMENT,
                                   `first_name` VARCHAR(50) NOT NULL,
