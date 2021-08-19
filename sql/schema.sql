@@ -80,3 +80,9 @@ INSERT INTO `hackathon`.`transaction` (`transaction_id`, `transaction_date`, `tr
 INSERT INTO `hackathon`.`transaction` (`transaction_id`, `transaction_date`, `transaction_type`, `amount`, `user_id`, `stock_id`) VALUES ('4', '2021-08-10', 'sell', '6', '1', '3');
 INSERT INTO `hackathon`.`transaction` (`transaction_id`, `transaction_date`, `transaction_type`, `amount`, `user_id`, `stock_id`) VALUES ('5', '2021-08-10', 'sell', '11', '2', '5');
 INSERT INTO `hackathon`.`transaction` (`transaction_id`, `transaction_date`, `transaction_type`, `amount`, `user_id`, `stock_id`) VALUES ('6', '2021-08-10', 'sell', '4', '3', '2');
+
+INSERT INTO `hackathon`.`stock` (`stock_id`, `stock_name`, `close_price`, `date`) VALUES ('1', 'WFC', '47.30', '2021-08-19');
+INSERT INTO `hackathon`.`stock` (`stock_id`, `stock_name`, `close_price`, `date`) VALUES ('2', 'BAC', '40.22', '2021-08-19');
+INSERT INTO `hackathon`.`stock` (`stock_id`, `stock_name`, `close_price`, `date`) VALUES ('3', 'GS', '393.18', '2021-08-19');
+INSERT INTO `hackathon`.`stock` (`stock_id`, `stock_name`, `close_price`, `date`) VALUES ('4', 'JPM', '154.22', '2021-08-19');
+INSERT INTO `hackathon`.`stock` (`stock_id`, `stock_name`, `close_price`, `date`) VALUES ('5', 'MS', '99.17', '2021-08-19');

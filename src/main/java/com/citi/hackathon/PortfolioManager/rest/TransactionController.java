@@ -3,6 +3,7 @@ package com.citi.hackathon.PortfolioManager.rest;
 import com.citi.hackathon.PortfolioManager.entities.Stock;
 import com.citi.hackathon.PortfolioManager.entities.Transaction;
 import com.citi.hackathon.PortfolioManager.entities.User;
+import com.citi.hackathon.PortfolioManager.response.UserNetWorth;
 import com.citi.hackathon.PortfolioManager.response.UserSummary;
 import com.citi.hackathon.PortfolioManager.response.UserTransaction;
 import com.citi.hackathon.PortfolioManager.service.StockService;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.Collection;
 
 @RestController
@@ -87,6 +89,11 @@ public class TransactionController {
     @RequestMapping(method = RequestMethod.GET, value = "/getusersummary/{id}")
     public UserSummary getUserSummary(@PathVariable("id") int id){
         return userService.getUserSummary(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getusernetworth/{id}")
+    public UserNetWorth getUserNetWorth(@PathVariable("id") int id) throws ParseException {
+        return userService.getUserNetWorth(id);
     }
 
 }

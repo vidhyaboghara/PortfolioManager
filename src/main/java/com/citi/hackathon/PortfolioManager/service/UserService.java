@@ -1,9 +1,11 @@
 package com.citi.hackathon.PortfolioManager.service;
 
 import com.citi.hackathon.PortfolioManager.entities.User;
+import com.citi.hackathon.PortfolioManager.response.UserNetWorth;
 import com.citi.hackathon.PortfolioManager.response.UserSummary;
 import com.citi.hackathon.PortfolioManager.response.UserTransaction;
 
+import java.text.ParseException;
 import java.util.Collection;
 
 public interface UserService {
@@ -12,6 +14,8 @@ public interface UserService {
     UserTransaction getUsersWithTransactionsById(int id);
 
     UserSummary getUserSummary(Integer id);
+
+    UserNetWorth getUserNetWorth(Integer id) throws ParseException;
 
     Collection<User> getAll();
 

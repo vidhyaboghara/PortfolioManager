@@ -7,6 +7,7 @@ import com.citi.hackathon.PortfolioManager.repositories.StockRepository;
 import com.citi.hackathon.PortfolioManager.repositories.TransactionRepository;
 import com.citi.hackathon.PortfolioManager.repositories.UserRepository;
 import com.citi.hackathon.PortfolioManager.response.Stock;
+import com.citi.hackathon.PortfolioManager.response.UserNetWorth;
 import com.citi.hackathon.PortfolioManager.response.UserSummary;
 import com.citi.hackathon.PortfolioManager.response.UserTransaction;
 import org.apache.logging.log4j.LogManager;
@@ -14,10 +15,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -130,4 +131,24 @@ public class UserServiceImpl implements UserService {
         userSummary.setStocks(stockList);
         return userSummary;
     }
+
+    @Override
+    public UserNetWorth getUserNetWorth(Integer id) throws ParseException {
+        UserNetWorth userNetWorth = new UserNetWorth();
+        UserSummary userSummary = getUserSummary(id);
+        userNetWorth.setUserId(id);
+        userNetWorth.setFirstName(userSummary.getFirstName());
+        userNetWorth.setLastName(userSummary.getLastName());
+        userNetWorth.setEmailId(userSummary.getEmailId());
+        Float networth = 0.0f;
+        for (Stock s: userSummary.getStocks()) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.println(dateFormat.parse(dateFormat.format(new Date())));
+            com.citi.hackathon.PortfolioManager.entities.Stock stock = stockRepository.findByStockIdentifier_StockIdAndStockIdentifier_Date(s.getStockId(), dateFormat.parse(dateFormat.format(new Date())));
+            networth += s.getAmount() * stock.getClosePrice();
+        }
+        userNetWorth.setNetWorth(networth);
+        return userNetWorth;
+    }
+
 }
