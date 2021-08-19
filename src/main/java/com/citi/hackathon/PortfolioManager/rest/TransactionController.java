@@ -108,4 +108,9 @@ public class TransactionController {
         return userService.getUserSpending(id);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/getincome/{id}")
+    public Float getIncome(@PathVariable("id") int id) throws ParseException {
+        return userService.getUserIncome(id);
+    }
+
 }

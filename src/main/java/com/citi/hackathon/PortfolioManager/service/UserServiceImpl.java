@@ -1,9 +1,6 @@
 package com.citi.hackathon.PortfolioManager.service;
 
-import com.citi.hackathon.PortfolioManager.entities.StatusCount;
-import com.citi.hackathon.PortfolioManager.entities.SummarizedAmount;
-import com.citi.hackathon.PortfolioManager.entities.Transaction;
-import com.citi.hackathon.PortfolioManager.entities.User;
+import com.citi.hackathon.PortfolioManager.entities.*;
 import com.citi.hackathon.PortfolioManager.repositories.StockRepository;
 import com.citi.hackathon.PortfolioManager.repositories.TransactionRepository;
 import com.citi.hackathon.PortfolioManager.repositories.UserRepository;
@@ -158,6 +155,47 @@ public class UserServiceImpl implements UserService {
         SummarizedAmount buy = transactionRepository.getBuyAmount(dateFormat.parse(dateFormat.format(new Date())), id);
         SummarizedAmount sell = transactionRepository.getSellAmount(dateFormat.parse(dateFormat.format(new Date())), id);
         return buy.getAmount()-sell.getAmount();
+    }
+
+    @Override
+    public Float getUserIncome(Integer id) throws ParseException{
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        List<StockTransactions> buyTransactions = transactionRepository.getBuyTransactions(dateFormat.parse(dateFormat.format(new Date())), id);
+        List<StockTransactions> sellTransactions = transactionRepository.getSellTransactions(dateFormat.parse(dateFormat.format(new Date())), id);
+        Float netIncome = 0.0f;
+        for (ListIterator<StockTransactions> it = buyTransactions.listIterator(); it.hasNext();) {
+            StockTransactions t = it.next();
+            StockTransactions sell = sellTransactions.stream().filter(stockTransactions -> stockTransactions.getId().equals(t.getId())).findFirst().orElse(null);
+            if(null!=sell){
+                Float gain = sell.getPrice()*sell.getAmount() - t.getPrice()*sell.getAmount();
+                netIncome += gain;
+                if(t.getAmount()-sell.getAmount() != 0){
+                    t.setAmount(t.getAmount()-sell.getAmount());
+                    it.set(t);
+                }
+                else{
+                    it.remove();
+                }
+
+            }
+            else{
+                com.citi.hackathon.PortfolioManager.entities.Stock curr = stockRepository.findByStockIdentifier_StockIdAndStockIdentifier_Date(t.getId(), dateFormat.parse(dateFormat.format(new Date())));
+                Float gain = curr.getClosePrice()*t.getAmount() - t.getPrice()*t.getAmount();
+                netIncome += gain;
+                it.remove();
+            }
+        }
+        if(!buyTransactions.isEmpty()){
+            for (Iterator<StockTransactions> it = buyTransactions.listIterator(); it.hasNext();) {
+                StockTransactions t = it.next();
+                com.citi.hackathon.PortfolioManager.entities.Stock curr = stockRepository.findByStockIdentifier_StockIdAndStockIdentifier_Date(t.getId(), dateFormat.parse(dateFormat.format(new Date())));
+                Float gain = curr.getClosePrice()*t.getAmount() - t.getPrice()*t.getAmount();
+                netIncome += gain;
+                it.remove();
+            }
+        }
+
+        return netIncome;
     }
 
 }

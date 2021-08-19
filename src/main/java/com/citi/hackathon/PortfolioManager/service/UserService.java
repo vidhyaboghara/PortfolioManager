@@ -9,6 +9,8 @@ import java.text.ParseException;
 import java.util.Collection;
 
 public interface UserService {
+    Float getUserIncome(Integer id) throws ParseException;
+
     Double getUserSpending(Integer id) throws ParseException;
 
     Collection<UserTransaction> getAllUsersWithTransactions();
