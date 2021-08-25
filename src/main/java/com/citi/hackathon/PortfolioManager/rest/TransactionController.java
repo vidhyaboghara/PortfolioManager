@@ -39,6 +39,11 @@ public class TransactionController {
         return userService.getAll();
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/user/{email}")
+    public User findUserByEmail(@PathVariable("email") String email){
+        return userService.getUserByEmailId(email);
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/transactions")
     public Iterable<Transaction> findAllTransaction(){
         return transactionService.getAll();
