@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/portfoliomanager")
 public class TransactionController {
