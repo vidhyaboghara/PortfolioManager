@@ -10,7 +10,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -73,7 +75,8 @@ public class StockServiceImpl implements StockService {
             StockMarketMover marketMover = new StockMarketMover();
             marketMover.setStockName(s.getStockName());
             marketMover.setStockPrice(s.getClosePrice());
-            marketMover.setMarketChange((s.getClosePrice() - yesterdayStock.getClosePrice())/100);
+            DecimalFormat df = new DecimalFormat("0.000");
+            marketMover.setMarketChange(Float.valueOf(df.format((s.getClosePrice() - yesterdayStock.getClosePrice())/100)));
             marketMovers.add(marketMover);
         }
         return marketMovers;
