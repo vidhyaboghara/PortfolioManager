@@ -49,7 +49,7 @@ public class TransactionController {
         return userService.getAllUsersWithTransactions();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/gettransactionsbyid/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/gettransactionsbyuserid/{id}")
     public UserTransaction findUserAndTransactionById(@PathVariable("id") int id){
         return userService.getUsersWithTransactionsById(id);
     }
@@ -72,6 +72,11 @@ public class TransactionController {
     @RequestMapping(method = RequestMethod.GET, value = "/getStocks")
     public Iterable<Stock> findAllStocks(){
         return stockService.getAll();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getStockNames")
+    public Iterable<String> findAllStockNames(){
+        return stockService.getAllStockNames();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/addUser")

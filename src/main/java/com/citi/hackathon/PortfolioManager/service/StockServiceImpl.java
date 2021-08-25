@@ -28,6 +28,11 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public List<String> getAllStockNames() {
+        return stockRepository.findAllStockNames();
+    }
+
+    @Override
     public List<Stock> getStockById(Integer id){
         return stockRepository.findByStockIdentifier_StockId(id);
     }

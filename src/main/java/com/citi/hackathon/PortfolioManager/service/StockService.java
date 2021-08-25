@@ -13,6 +13,8 @@ public interface StockService {
 
     Collection<Stock> getAll();
 
+    List<String> getAllStockNames();
+
     List<Stock> getStockById(Integer id);
 
     Stock getStockByName(String name);
