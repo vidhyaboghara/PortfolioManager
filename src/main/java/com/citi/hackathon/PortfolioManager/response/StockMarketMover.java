@@ -7,5 +7,6 @@ import lombok.Setter;
 @Setter
 public class StockMarketMover {
     private String stockName;
+    private Float stockPrice;
     private Float marketChange;
 }

@@ -72,6 +72,7 @@ public class StockServiceImpl implements StockService {
             Stock yesterdayStock = stockRepository.findByStockIdentifier_StockIdAndStockIdentifier_Date(s.getStockIdentifier().getStockId(),dateFormat.parse(dateFormat.format(yesterday())));
             StockMarketMover marketMover = new StockMarketMover();
             marketMover.setStockName(s.getStockName());
+            marketMover.setStockPrice(s.getClosePrice());
             marketMover.setMarketChange((s.getClosePrice() - yesterdayStock.getClosePrice())/100);
             marketMovers.add(marketMover);
         }
