@@ -41,7 +41,7 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public Stock getStockByName(String name){
-        return stockRepository.getByStockName(name);
+        return stockRepository.getByStockName(name).get(1);
     }
 
     @Override

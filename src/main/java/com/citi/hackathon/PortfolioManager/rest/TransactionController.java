@@ -1,5 +1,6 @@
 package com.citi.hackathon.PortfolioManager.rest;
 
+import com.citi.hackathon.PortfolioManager.entities.RequestTransaction;
 import com.citi.hackathon.PortfolioManager.entities.Stock;
 import com.citi.hackathon.PortfolioManager.entities.Transaction;
 import com.citi.hackathon.PortfolioManager.entities.User;
@@ -95,7 +96,7 @@ public class TransactionController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/addTransaction")
-    public void addTransaction(@RequestBody Transaction transaction){
+    public void addTransaction(@RequestBody RequestTransaction transaction) throws ParseException {
         transactionService.addNewTransaction(transaction);
     }
 
