@@ -9,13 +9,14 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
     Collection<Transaction> getByUserId(Integer userId);
 
     @Query("select SUM(amount) from Transaction WHERE userId = :userId and stockId=:stockId and transactionType=:trType")
-    Long getCount(@Param("trType") TransactionType trType ,@Param("stockId") int id, @Param("userId") int userId);
+    Optional<Long> getCount(@Param("trType") TransactionType trType , @Param("stockId") int id, @Param("userId") int userId);
 
     @Query("select new com.citi.hackathon.PortfolioManager.entities.StatusCount(tr.stockId,SUM(tr.amount)) from Transaction tr WHERE tr.userId = :userId and tr.transactionType = 'buy' group by tr.stockId")
     Collection<StatusCount> getBuyCount(@Param("userId") Integer userId);

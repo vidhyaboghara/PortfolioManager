@@ -58,10 +58,9 @@ public class TransactionServiceImpl implements TransactionService {
         tr.setStock(st);
 
         if(tr.getTransactionType().equals(TransactionType.sell)){
-            System.out.println(tr.getStockId());
-            System.out.println(tr.getUserId());
-            int buyStocks = Math.toIntExact(transactionRepository.getCount(TransactionType.buy, tr.getStockId(), tr.getUserId()));
-            int sellStocks = Math.toIntExact(transactionRepository.getCount(TransactionType.sell, tr.getStockId(), tr.getUserId()));
+
+            int buyStocks = Math.toIntExact(transactionRepository.getCount(TransactionType.buy, tr.getStockId(), tr.getUserId()).orElse(0L));
+            int sellStocks = Math.toIntExact(transactionRepository.getCount(TransactionType.sell, tr.getStockId(), tr.getUserId()).orElse(0L));
 
             if(buyStocks-sellStocks >= tr.getAmount() && !tr.getTransactionDate().after(new Date())){
                 transactionRepository.save(tr);
