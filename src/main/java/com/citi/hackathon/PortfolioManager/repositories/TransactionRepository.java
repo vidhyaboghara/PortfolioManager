@@ -14,7 +14,8 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
     Collection<Transaction> getByUserId(Integer userId);
 
-    Collection<Transaction> getByTransactionTypeAndStockId(TransactionType t, int id);
+    @Query("select SUM(amount) from Transaction WHERE userId = :userId and stockId=:stockId and transactionType=:trType")
+    Long getCount(@Param("trType") TransactionType trType ,@Param("stockId") int id, @Param("userId") int userId);
 
     @Query("select new com.citi.hackathon.PortfolioManager.entities.StatusCount(tr.stockId,SUM(tr.amount)) from Transaction tr WHERE tr.userId = :userId and tr.transactionType = 'buy' group by tr.stockId")
     Collection<StatusCount> getBuyCount(@Param("userId") Integer userId);
